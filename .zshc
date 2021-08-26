@@ -1,6 +1,7 @@
 ## @Author : SBEN 
 
 ZSHC_PATH="/Users/$(whoami)/_zshconfig"
+SHARED_PATH="/Users/Shared/_SDK"
 
 ## -- Source Config files --
 
@@ -20,15 +21,3 @@ done
 
 SCRIPTS_PATH=$ZSHC_PATH/scripts
 export PATH=$PATH:$SCRIPTS_PATH
-
-## -- This config May Change --
-
-SHARED_PATH="/Users/Shared/_SDK"
-
-## Path to Flutter SDK 
-FLUTTER_SDK=$SHARED_PATH/_Flutter/bin
-
-## Path to Android SDK
-ANDROID_HOME=$SHARED_PATH/_Android/sdk
-
-## -- END --

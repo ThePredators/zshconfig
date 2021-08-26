@@ -1,0 +1,14 @@
+## Path to Android SDK
+ANDROID_HOME=$SHARED_PATH/_Android/sdk
+
+export ANDROID_HOME=$ANDROID_HOME
+export PATH=$ANDROID_HOME:$PATH
+
+export SDK_PLATFORM_TOOLS=$ANDROID_HOME/platform-tools
+export PATH=$SDK_PLATFORM_TOOLS:$PATH
+
+export SDK_TOOLS=$ANDROID_HOME/tools/bin
+export PATH=$SDK_TOOLS:$PATH
+
+export SDK_MANAGER=$ANDROID_HOME/tools/bin/sdkmanager
+export PATH=$SDK_MANAGER:$PATH

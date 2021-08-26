@@ -1,4 +1,5 @@
-# Flatter
+## Path to Flutter SDK 
+FLUTTER_SDK=$SHARED_PATH/_Flutter/bin
 
 ## Flutter cache
 PUB_CACHE_BIN=$HOME/.pub-cache/bin
