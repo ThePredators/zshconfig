@@ -1,0 +1,34 @@
+## @Author : SBEN 
+
+ZSHC_PATH="/Users/$(whoami)/_zshconfig"
+
+## -- Source Config files --
+
+CONFIG_PATH=$ZSHC_PATH/config
+for file in $CONFIG_PATH/*.sh; do
+	source "$file"
+done
+
+## -- Source Aliases files --
+
+ALIAS_PATH=$ZSHC_PATH/aliases
+for file in $ALIAS_PATH/*.sh; do
+	source "$file"
+done
+
+## -- Export Scripts files --
+
+SCRIPTS_PATH=$ZSHC_PATH/scripts
+export PATH=$PATH:$SCRIPTS_PATH
+
+## -- This config May Change --
+
+SHARED_PATH="/Users/Shared/_SDK"
+
+## Path to Flutter SDK 
+FLUTTER_SDK=$SHARED_PATH/_Flutter/bin
+
+## Path to Android SDK
+ANDROID_HOME=$SHARED_PATH/_Android/sdk
+
+## -- END --
