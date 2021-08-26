@@ -1,6 +1,6 @@
 ## @Author : SBEN 
 
-ZSHC_PATH="/Users/$(whoami)/_zshconfig"
+ZSHC_PATH="$PWD"
 SHARED_PATH="/Users/Shared/_SDK"
 
 ## -- Source Config files --
