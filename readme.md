@@ -16,10 +16,13 @@ source /Users/$(whoami)/zshconfig/.zshc
 3. ⚠️ Don't forget to give your script files execution rights. You can do that by simply running this script :
 ```sh
 bash scripts/give-script-exec-rights.sh
-```
+``` 
 
-🔆 When you create your own config file / alias file / script file you will never need to import it to the .zshrc or .zshc its done automatically. Just run a new terminal/iTerm Window/Tab.  
+## 🔆 How does this work ? 
 
+When you create your own config file / alias file / script file you will never need to import it to the .zshrc or .zshc its done automatically. 
+
+Just run a new terminal/iTerm Window/Tab. 
 
 ## ⭐️ Project Architecture 
 
