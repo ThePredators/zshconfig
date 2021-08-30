@@ -18,15 +18,18 @@ source /Users/$(whoami)/zshconfig/.zshc
 bash scripts/give-script-exec-rights.sh
 ``` 
 
+**If your current macOS version is greather than 11, edit .zshc with :**
+
+```sh
+IS_MACOS_GT_11=true
+```
+
 **For Intel Users**
 
 Edit .zshc and change this to :
 ```sh
 # Disable M1 Support
 IS_M1_SHIP=false
-
-# If macOS greather than 11 !
-IS_MACOS_GT_11=true
 ```
 
 **For M1 Users**
@@ -35,9 +38,6 @@ Edit .zshc and change this to :
 ```sh
 # Enable M1 Support
 IS_M1_SHIP=true
-
-# If macOS greather than 11 !
-IS_MACOS_GT_11=true
 ```
 
 ## 🔆 How does this work ? 
