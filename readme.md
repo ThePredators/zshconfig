@@ -18,6 +18,28 @@ source /Users/$(whoami)/zshconfig/.zshc
 bash scripts/give-script-exec-rights.sh
 ``` 
 
+**For Intel Users**
+
+Edit .zshc and change this to :
+```sh
+# Disable M1 Support
+IS_M1_SHIP=false
+
+# If macOS greather than 11 !
+IS_MACOS_GT_11=true
+```
+
+**For M1 Users**
+
+Edit .zshc and change this to :
+```sh
+# Enable M1 Support
+IS_M1_SHIP=true
+
+# If macOS greather than 11 !
+IS_MACOS_GT_11=true
+```
+
 ## 🔆 How does this work ? 
 
 When you create your own config file / alias file / script file you will never need to import it to the .zshrc or .zshc its done automatically. 
