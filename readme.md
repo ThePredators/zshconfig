@@ -64,6 +64,37 @@ zshconfig
     │   *.sh
 ```
 
+## ⭐️ BackUp your configuration :
+
+Don't foget to save your config on a private Git repository to easily find it or share it across your computers. 
+
+To do that follow this steps
+
+1. Git Init in  /Users/$(whoami)/
+```sh
+git init
+```
+2. Edit the .gitignore and keep only this
+```md
+# Ignore everything
+/*
+
+# do not ignore these files...
+!.gitignore
+!.zshrc
+!.zshenv
+!.zprofile
+
+## if you want to backup the zsh command you used 
+!.zsh_history
+
+## Backup zshconfig
+!/zshconfig
+```
+3. Add all, set your private repos and push
+
+You're good to go !
+
 ## ⭐️ Questions :
 
 **Why using .sh files in config/aliases folders ?**
