@@ -44,7 +44,19 @@ IS_M1_SHIP=true
 
 When you create your own config file / alias file / script file you will never need to import it to the .zshrc or .zshc its done automatically. 
 
-Just run a new terminal/iTerm Window/Tab. 
+Just run a new terminal/iTerm Window/Tab
+
+**⭐️ Or Be clever :**
+
+Add this alias to your .zshrc like this :
+```
+alias reload="source /Users/$(whoami)/.zshrc"
+```
+
+Now everytime you edit an alias/config/script just run : 
+```
+reload
+```
 
 ## ⭐️ Project Architecture 
 
