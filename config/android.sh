@@ -1,14 +1,21 @@
-## Path to Android SDK
-ANDROID_HOME=$SHARED_PATH/_Android/sdk
-
-export ANDROID_HOME=$ANDROID_HOME
+export ANDROID_HOME=$HBP/share/android-commandlinetools
 export PATH=$ANDROID_HOME:$PATH
 
-export SDK_PLATFORM_TOOLS=$ANDROID_HOME/platform-tools
-export PATH=$SDK_PLATFORM_TOOLS:$PATH
+export AVD=$HBP/bin/avdmanager
+export PATH=$AVD:$PATH
 
-export SDK_TOOLS=$ANDROID_HOME/tools/bin
-export PATH=$SDK_TOOLS:$PATH
-
-export SDK_MANAGER=$ANDROID_HOME/tools/bin/sdkmanager
+export SDK_MANAGER=$HBP/bin/sdkmanager
 export PATH=$SDK_MANAGER:$PATH
+
+export ADB=$HBP/bin/adb
+export PATH=$ADB:$PATH
+
+## Android Studio
+export STUDIO_JDK=$JAVA_HOME
+export PATH=$STUDIO_JDK:$PATH
+
+export STUDIO_GRADLE_JDK=$GRADLE_HOME
+export PATH=$STUDIO_GRADLE_JDK:$PATH
+
+export ANDROID_SDK_ROOT=$ANDROID_HOME
+export PATH=$ANDROID_SDK_ROOT:$PATH
