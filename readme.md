@@ -9,8 +9,23 @@ This project shows how to interact with zsh in a clever way, to organize your fi
 ## 🔥 How to use ?
 
 1. Clone this repository to `/Users/$(whoami)/`  
-2. Edit .zshrc (.zshrc should not contain anything but this line). Zsh config can be edited here `config/zsh.sh` 
+2. Edit .zshrc (.zshrc should not contain anything but these lines). Zsh config can be edited here `config/zsh.sh` 
 ```sh 
+## Zsh config 
+alias reload="source /Users/$(whoami)/.zshrc"
+
+## Check CPU type
+CPU_TYPE=$(sysctl -n machdep.cpu.brand_string)
+if [[ $CPU_TYPE == *"Apple"* ]]; then
+    IS_M1_SHIP=true
+else
+    IS_M1_SHIP=false
+fi
+
+## Check OSX Version if greater than or equal to 11.0
+IS_MACOS_GT_11=$(if ((`bc <<< "${$(sw_vers -productVersion | awk -F. '{print $1"."$2}')}>11.0"`)); then echo "true"; else echo "false"; fi)
+
+## Source my custom zsh config
 source /Users/$(whoami)/zshconfig/.zshc
 ```
 3. ⚠️ Don't forget to give your script files execution rights. You can do that by simply running this script :
@@ -18,40 +33,9 @@ source /Users/$(whoami)/zshconfig/.zshc
 bash scripts/give-script-exec-rights.sh
 ``` 
 
-**If your current macOS version is greather than 11, edit .zshc with :**
-
-```sh
-IS_MACOS_GT_11=true
-```
-
-**For Intel Users**
-
-Edit .zshc and change this to :
-```sh
-# Disable M1 Support
-IS_M1_SHIP=false
-```
-
-**For M1 Users**
-
-Edit .zshc and change this to :
-```sh
-# Enable M1 Support
-IS_M1_SHIP=true
-```
-
 ## 🔆 How does this work ? 
 
 When you create your own config file / alias file / script file you will never need to import it to the .zshrc or .zshc its done automatically. 
-
-Just run a new terminal/iTerm Window/Tab
-
-**⭐️ Or Be clever :**
-
-Add this alias to your .zshrc like this :
-```
-alias reload="source /Users/$(whoami)/.zshrc"
-```
 
 Now everytime you edit an alias/config/script just run : 
 ```
@@ -71,6 +55,8 @@ zshconfig
 └───config # will contain only config files
 │   │   *.sh
 │   │   zsh.sh # will contain the zsh config
+└───m1 # will contain only config files for M1 Apple's
+│   │   m1.sh
 │   
 └───scripts # will contain your scripts ready to be runned
     │   *.sh

@@ -1,29 +1,31 @@
 ## @Author : SBEN 
 
-IS_M1_SHIP=true
-IS_MACOS_GT_11=true # GT : Greater than
-
-ZSHC_PATH="$PWD/zshconfig"
 SHARED_PATH="/Users/Shared/_SDK"
+ZSHC_PATH=/Users/$(whoami)/_z
 
 CONFIG_PATH=$ZSHC_PATH/config
 ALIAS_PATH=$ZSHC_PATH/aliases
 SCRIPTS_PATH=$ZSHC_PATH/scripts
+M1_PATH=$ZSHC_PATH/m1
+
+## -- M1 Config activation --
+
+if [[ "$IS_M1_SHIP" == true ]]; then
+	for file in $M1_PATH/*.sh; do
+		source "$file"
+	done
+fi
 
 ## -- Source Config files --
 
 for file in $CONFIG_PATH/*.sh; do
-	if [ "$file" != "m1.sh" ] && [ "$file" != "homebrew.sh" ]; then
-		source "$file"
-	fi
+	source "$file"
 done
 
 ## -- Source Aliases files --
 
 for file in $ALIAS_PATH/*.sh; do
-	if [[ "$file" != "m1.sh" ]]; then
-		source "$file"
-	fi
+	source "$file"
 done
 
 ## -- Export Scripts files --
