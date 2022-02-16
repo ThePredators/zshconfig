@@ -1,7 +1,7 @@
 ## @Author : SBEN 
 
 SHARED_PATH="/Users/Shared/_SDK"
-ZSHC_PATH=/Users/$(whoami)/_z
+ZSHC_PATH=/Users/$(whoami)/zshconfig
 
 CONFIG_PATH=$ZSHC_PATH/config
 ALIAS_PATH=$ZSHC_PATH/aliases
