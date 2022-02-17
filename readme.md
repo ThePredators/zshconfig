@@ -9,7 +9,7 @@ This project shows how to interact with zsh in a clever way, to organize your fi
 ## 🔥 How to use ?
 
 1. Clone this repository to `/Users/$(whoami)/`  
-2. Edit .zshrc (.zshrc should not contain anything but these lines). Zsh config can be edited here `config/zsh.sh` 
+2. Edit .zshrc (.zshrc should not contain anything but these lines) 
 ```sh 
 ## Zsh config 
 alias reload="source /Users/$(whoami)/.zshrc"
