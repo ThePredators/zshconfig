@@ -1,37 +1,75 @@
 ## @Author : SBEN 
 
-SHARED_PATH="/Users/Shared/_SDK"
-ZSHC_PATH=/Users/$(whoami)/zshconfig
-
-CONFIG_PATH=$ZSHC_PATH/config
-ALIAS_PATH=$ZSHC_PATH/aliases
-SCRIPTS_PATH=$ZSHC_PATH/scripts
-M1_PATH=$ZSHC_PATH/m1
-
-## -- M1 Config activation --
-
-if [[ "$IS_M1_SHIP" == true ]]; then
-	for file in $M1_PATH/*.sh; do
-		source "$file"
-	done
-fi
+ZSHC_PATH=/Users/$(whoami)/_z
 
 ## -- Source Config files --
 
-for file in $CONFIG_PATH/*.sh; do
-	source "$file"
-done
+config_conf() {
+	CONFIG_PATH=$ZSHC_PATH/config
+	for file in $CONFIG_PATH/**/*.sh; do
+		source "$file"
+	done
+}
 
 ## -- Source Aliases files --
 
-for file in $ALIAS_PATH/*.sh; do
-	source "$file"
-done
+typeset -gA alias_files
+typeset -gA alias_mtimes
+
+alias_conf() {
+    ALIAS_PATH=$ZSHC_PATH/aliases
+    
+    for file in $ALIAS_PATH/**/*.sh; do
+        source "$file"
+        alias_mtimes[$file]=$(stat -f %m "$file" 2>/dev/null || stat -c %Y "$file")
+        
+        # Track which functions come from which file
+        func_names=(${(f)"$(grep -oE '^(function )?[a-zA-Z_][a-zA-Z0-9_]*(\(\))?' "$file" | sed -e 's/^function //' -e 's/()//')"})
+        
+        for func_name in $func_names; do
+            alias_files[$func_name]=$file
+        done
+    done
+}
+
+# Auto-reload before each command
+preexec() {
+    local cmd_name=${1%% *}  # Get first word of command
+    
+    if [[ -n ${alias_files[$cmd_name]} ]]; then
+        local file=${alias_files[$cmd_name]}
+        local current_mtime=$(stat -f %m "$file" 2>/dev/null || stat -c %Y "$file")
+        
+        if [[ $current_mtime != ${alias_mtimes[$file]} ]]; then
+            source "$file"
+            alias_mtimes[$file]=$current_mtime
+        fi
+    fi
+}
 
 ## -- Export Scripts files --
 
-export PATH=$PATH:$SCRIPTS_PATH
+scripts_conf() {
+	SCRIPTS_PATH=$ZSHC_PATH/scripts
+	for file in $SCRIPTS_PATH/**/*; do
+		export PATH=$PATH:$file
+	done
+	export PATH=$PATH:$SCRIPTS_PATH
+	chmod +x /Users/$(whoami)/_z/scripts/**/*.sh
+}
 
+## -- Source Last Config files --
 
+last_conf() {
+	LAST_CONFIG_PATH=$ZSHC_PATH/last_config
+	for file in $LAST_CONFIG_PATH/*.sh; do
+		source "$file"
+	done
+}
 
+## RUN ##
 
+config_conf
+alias_conf
+scripts_conf
+last_conf
