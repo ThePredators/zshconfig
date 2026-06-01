@@ -92,7 +92,8 @@ You're good to go !
 **Why using .sh files in config/aliases folders ?**
 I use ".sh" extension to have great sythaxe format on most of text editors, but you can remove ".sh" extension if you want. 
 
-**2026 Features**
-- When you edit an alias & script file it auto updated on zsh system. You can run an alias function, then update its content, and re-run it wihtout reloading zsh session. 
+**2026 Magic Feature**
+- When you edit an alias & script file it is auto updated on zsh session.
+- To test this you can run an alias function, then update its content, and re-run it. 
 
 Enjoy :) 
