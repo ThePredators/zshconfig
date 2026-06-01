@@ -1,7 +1,6 @@
 # ZSH Config
 ![](https://img.shields.io/badge/version-1.0.0-green.svg)
 
-
 ## ⭐️ About 
 
 This project shows how to interact with zsh in a clever way, to organize your files and keep your mind and zsh usage clean
@@ -35,12 +34,9 @@ bash scripts/give-script-exec-rights.sh
 
 ## 🔆 How does this work ? 
 
-When you create your own config file / alias file / script file you will never need to import it to the .zshrc or .zshc its done automatically. 
-
-Now everytime you edit an alias/config/script just run : 
-```
-reload
-```
+- When you create your own (config, alias & script file) you will never need to import it to the `.zshrc` or `.zshc` its done automatically. 
+- To source for the fisrt time your aliases, scripts & configs you need to run `reload`
+- After the first sourcing you can edit aliases functions & scripts without needing to reload ! 
 
 ## ⭐️ Project Architecture 
 
@@ -55,8 +51,6 @@ zshconfig
 └───config # will contain only config files
 │   │   *.sh
 │   │   zsh.sh # will contain the zsh config
-└───m1 # will contain only config files for M1 Apple's
-│   │   m1.sh
 │   
 └───scripts # will contain your scripts ready to be runned
     │   *.sh
@@ -97,5 +91,8 @@ You're good to go !
 
 **Why using .sh files in config/aliases folders ?**
 I use ".sh" extension to have great sythaxe format on most of text editors, but you can remove ".sh" extension if you want. 
+
+**2026 Features**
+- When you edit an alias & script file it auto updated on zsh system. You can run an alias function, then update its content, and re-run it wihtout reloading zsh session. 
 
 Enjoy :) 
