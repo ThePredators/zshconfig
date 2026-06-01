@@ -1,1 +1,1 @@
-chmod +x /Users/$(whoami)/_zconfig/scripts/**.sh
+chmod +x /Users/$(whoami)/_zconfig/scripts/*/**.sh
