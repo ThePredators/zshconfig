@@ -1,15 +1,11 @@
-## @Author : SBEN 
+## @Author : SBEN
 
-ZSHC_PATH=/Users/$(whoami)/_z
+ZSHC_PATH=/Users/$(whoami)/zshconfig
 
-## -- Source Config files --
-
-config_conf() {
-	CONFIG_PATH=$ZSHC_PATH/config
-	for file in $CONFIG_PATH/**/*.sh; do
-		source "$file"
-	done
-}
+SCRIPTS_PATH=$ZSHC_PATH/scripts
+ALIAS_PATH=$ZSHC_PATH/aliases
+CONFIG_PATH=$ZSHC_PATH/config
+LAST_CONF_PATH=$ZSHC_PATH/latest
 
 ## -- Source Aliases files --
 
@@ -17,15 +13,11 @@ typeset -gA alias_files
 typeset -gA alias_mtimes
 
 alias_conf() {
-    ALIAS_PATH=$ZSHC_PATH/aliases
-    
     for file in $ALIAS_PATH/**/*.sh; do
         source "$file"
         alias_mtimes[$file]=$(stat -f %m "$file" 2>/dev/null || stat -c %Y "$file")
-        
         # Track which functions come from which file
         func_names=(${(f)"$(grep -oE '^(function )?[a-zA-Z_][a-zA-Z0-9_]*(\(\))?' "$file" | sed -e 's/^function //' -e 's/()//')"})
-        
         for func_name in $func_names; do
             alias_files[$func_name]=$file
         done
@@ -35,11 +27,9 @@ alias_conf() {
 # Auto-reload before each command
 preexec() {
     local cmd_name=${1%% *}  # Get first word of command
-    
     if [[ -n ${alias_files[$cmd_name]} ]]; then
         local file=${alias_files[$cmd_name]}
         local current_mtime=$(stat -f %m "$file" 2>/dev/null || stat -c %Y "$file")
-        
         if [[ $current_mtime != ${alias_mtimes[$file]} ]]; then
             source "$file"
             alias_mtimes[$file]=$current_mtime
@@ -47,24 +37,30 @@ preexec() {
     fi
 }
 
+## -- Source Config files --
+
+config_conf() {
+    for file in $CONFIG_PATH/**/*.sh; do
+        source "$file"
+    done
+}
+
 ## -- Export Scripts files --
 
 scripts_conf() {
-	SCRIPTS_PATH=$ZSHC_PATH/scripts
 	for file in $SCRIPTS_PATH/**/*; do
 		export PATH=$PATH:$file
 	done
 	export PATH=$PATH:$SCRIPTS_PATH
-	chmod +x /Users/$(whoami)/_z/scripts/**/*.sh
+	chmod +x $ZSHC_PATH/scripts/**/*.sh
 }
 
-## -- Source Last Config files --
+## -- Source Last Conf files --
 
 last_conf() {
-	LAST_CONFIG_PATH=$ZSHC_PATH/last_config
-	for file in $LAST_CONFIG_PATH/*.sh; do
-		source "$file"
-	done
+    for file in $LAST_CONF_PATH/**/*.sh; do
+        source "$file"
+    done
 }
 
 ## RUN ##

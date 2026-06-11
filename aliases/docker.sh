@@ -29,14 +29,6 @@ dcp() {
   HTTP_PROXY=$PROXY docker $@;
 }
 
-dr() {
-  docker run -i -t -p $1:$2 $3; 
-}
-
-drp() {
-  HTTP_PROXY=$PROXY docker run -i -t -p $1:$2 $3; # from:to
-}
-
 ds() {
   docker exec -it $@ bash;
 }

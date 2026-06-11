@@ -1,4 +1,4 @@
-# ZSH Config
+# ZSH Config (for mainly Apple Silicon)
 ![](https://img.shields.io/badge/version-1.0.0-green.svg)
 
 ## ⭐️ About 
@@ -10,27 +10,13 @@ This project shows how to interact with zsh in a clever way, to organize your fi
 1. Clone this repository to `/Users/$(whoami)/`  
 2. Edit .zshrc (.zshrc should not contain anything but these lines) 
 ```sh 
-## Zsh config 
-alias reload="source /Users/$(whoami)/.zshrc"
-
-## Check CPU type
-CPU_TYPE=$(sysctl -n machdep.cpu.brand_string)
-if [[ $CPU_TYPE == *"Apple"* ]]; then
-    IS_M1_SHIP=true
-else
-    IS_M1_SHIP=false
-fi
-
-## Check OSX Version if greater than or equal to 11.0
-IS_MACOS_GT_11=$(if ((`bc <<< "${$(sw_vers -productVersion | awk -F. '{print $1"."$2}')}>11.0"`)); then echo "true"; else echo "false"; fi)
-
-## Source my custom zsh config
 source /Users/$(whoami)/zshconfig/.zshc
 ```
-3. ⚠️ Don't forget to give your script files execution rights. You can do that by simply running this script :
+3. ⚠️ Run a new terminal & run :
 ```sh
-bash scripts/give-script-exec-rights.sh
+setup_zsh
 ``` 
+4. close all previous terminals and open a new one you are all setup.
 
 ## 🔆 How does this work ? 
 
@@ -44,14 +30,15 @@ bash scripts/give-script-exec-rights.sh
 zshconfig
 │   README.md
 │   .zshc  # will contain only Root_PATHS and configs added dynamically
-│
+└───_ # will contain only static configs
+│   │   <any>
 └───aliases # will contain all your aliases
 │   │   *.sh
-│   
 └───config # will contain only config files
 │   │   *.sh
-│   │   zsh.sh # will contain the zsh config
-│   
+│      zsh.sh # will contain the zsh config
+└───lastest # will contain only the latest configs you need to add to zshrc (initially)
+│   │   *.sh
 └───scripts # will contain your scripts ready to be runned
     │   *.sh
 ```
