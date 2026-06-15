@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browser Settings</title>
+    <style>
+        {{COMMON_CSS}}
+        
+        .container {
+            max-width: 700px;
+        }
+        
+        .header {
+            margin-bottom: 48px;
+        }
+        
+        .header h1 {
+            margin-bottom: 12px;
+        }
+        
+        .header p {
+            font-size: 18px;
+        }
+        
+        .section {
+            overflow: hidden;
+        }
+        
+        .section h2 {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section h2::before {
+            content: "";
+            width: 4px;
+            height: 24px;
+            background: linear-gradient(135deg, var(--accent-color), #5ac8fa);
+            border-radius: 2px;
+        }
+        
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0;
+            border-bottom: 1px solid var(--border-color);
+            transition: all 0.2s ease;
+        }
+        
+        .setting-item:last-child {
+            border-bottom: none;
+        }
+        
+        .setting-item:hover {
+            padding-left: 8px;
+            background: linear-gradient(90deg, var(--accent-color)08, transparent);
+            border-radius: 8px;
+            margin: 0 -8px;
+            padding-right: 8px;
+        }
+        
+        .setting-info {
+            flex: 1;
+        }
+        
+        .setting-info h3 {
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--text-color);
+        }
+        
+        .setting-info p {
+            color: var(--secondary-text);
+            font-size: 15px;
+            line-height: 1.4;
+            opacity: 0.9;
+        }
+        
+        .button.small {
+            padding: 10px 18px;
+            font-size: 15px;
+            font-weight: 600;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px var(--shadow);
+            transition: all 0.3s ease;
+            min-width: 100px;
+        }
+        
+        .button.small:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px var(--shadow);
+        }
+        
+        .button.danger {
+            background: linear-gradient(135deg, #ff3b30, #ff6b6b);
+        }
+        
+        .button.danger:hover {
+            background: linear-gradient(135deg, #d70015, #ff3b30);
+        }
+        
+        .stats {
+            text-align: center;
+            color: var(--secondary-text);
+            font-size: 15px;
+            margin-top: 48px;
+            padding: 24px;
+            background: var(--section-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .stats strong {
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+        
+        /* Privacy section specific styling */
+        .privacy-section .section h2::before {
+            background: linear-gradient(135deg, #ff3b30, #ff6b6b);
+        }
+        
+        /* Permissions section specific styling */
+        .permissions-section .section h2::before {
+            background: linear-gradient(135deg, #007aff, #5ac8fa);
+        }
+        
+        /* Search section specific styling */
+        .search-section .section h2::before {
+            background: linear-gradient(135deg, #34c759, #5ac8fa);
+        }
+        
+        /* Adblock section specific styling */
+        .adblock-section .section h2::before {
+            background: linear-gradient(135deg, #ff9500, #ffcc02);
+        }
+        
+        /* Proxy section specific styling */
+        .proxy-section .section h2::before {
+            background: linear-gradient(135deg, #5856d6, #af52de);
+        }
+        
+        /* Extensions section specific styling */
+        .extensions-section .section h2::before {
+            background: linear-gradient(135deg, #34c759, #5ac8fa);
+        }
+
+        /* Link opening section specific styling */
+        .link-opening-section .section h2::before {
+            background: linear-gradient(135deg, #ff9500, #ffcc02);
+        }
+        
+        /* Extension item styling */
+        .extension-box {
+            background: var(--section-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 16px;
+            transition: all 0.2s ease;
+        }
+        
+        .extension-box:hover {
+            border-color: var(--accent-color);
+            box-shadow: 0 4px 12px var(--shadow);
+            transform: translateY(-2px);
+        }
+        
+        .extension-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        
+        .extension-info h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-color);
+            margin: 0 0 4px 0;
+        }
+        
+        .extension-info p {
+            font-size: 14px;
+            color: var(--secondary-text);
+            margin: 0;
+            line-height: 1.4;
+        }
+        
+        .extension-details {
+            display: flex;
+            gap: 16px;
+            margin-top: 12px;
+            font-size: 13px;
+            color: var(--secondary-text);
+        }
+        
+        .extension-detail {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .no-extensions {
+            text-align: center;
+            padding: 48px 24px;
+            color: var(--secondary-text);
+        }
+        
+        .no-extensions h4 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-color);
+        }
+        
+        .no-extensions p {
+            font-size: 15px;
+            line-height: 1.5;
+        }
+        
+        /* Collapsible section styling */
+        .collapsible-section {
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .collapsible-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+        
+        .collapsible-header:hover {
+            background: var(--accent-color)08;
+        }
+        
+        .collapsible-title {
+            flex: 1;
+        }
+        
+        .collapsible-title h2 {
+            margin-bottom: 8px !important;
+        }
+        
+        .collapsible-subtitle {
+            font-size: 15px;
+            color: var(--secondary-text);
+            opacity: 0.8;
+            font-style: italic;
+        }
+        
+        .collapse-indicator {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary-text);
+            transition: transform 0.3s ease;
+        }
+        
+        .collapsible-section.expanded .collapse-indicator {
+            transform: rotate(90deg);
+        }
+        
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .collapsible-section.expanded .collapsible-content {
+            max-height: 2000px;
+        }
+        
+        /* Input styling */
+        .input-group input[type="text"],
+        .input-group input[type="number"],
+        .input-group input[type="url"] {
+            padding: 10px 14px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--section-bg);
+            color: var(--text-color);
+            font-size: 14px;
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+            transition: all 0.2s ease;
+            flex: 1;
+        }
+        
+        .input-group input[type="text"]:focus,
+        .input-group input[type="number"]:focus,
+        .input-group input[type="url"]:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px var(--accent-color)20;
+        }
+        
+        .input-group input:disabled {
+            cursor: not-allowed;
+            background: var(--border-color);
+        }
+        
+        .input-group span {
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+            color: var(--secondary-text);
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        /* URL list styling */
+        .url-item {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 8px;
+            align-items: center;
+        }
+        
+        .url-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .url-item input[type="url"] {
+            padding: 10px 14px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--section-bg);
+            color: var(--text-color);
+            font-size: 14px;
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+            transition: all 0.2s ease;
+            flex: 1;
+        }
+        
+        .url-item input[type="url"]:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px var(--accent-color)20;
+        }
+        
+        .remove-url {
+            background-color: #ff3b30 !important;
+            border-color: #ff3b30 !important;
+            min-width: 28px;
+            width: 28px;
+            flex-shrink: 0;
+            padding: 6px 8px;
+        }
+        
+        .remove-url:hover {
+            background-color: #d70015 !important;
+            border-color: #d70015 !important;
+        }
+        
+        /* URL settings container */
+        .url-settings {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+        }
+        
+        /* Button group styling */
+        .button-group {
+            display: flex;
+            gap: 10px;
+        }
+        
+        /* Setting note styling */
+        .setting-note {
+            margin-top: 16px;
+            padding: 12px 16px;
+            background: var(--border-color);
+            border-radius: 8px;
+            border-left: 4px solid #ff9500;
+        }
+        
+        .setting-note p {
+            margin: 0;
+            font-size: 14px;
+            color: var(--secondary-text);
+            line-height: 1.4;
+        }
+        
+        /* Link styling */
+        .setting-info a {
+            color: var(--accent-color);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-bottom-color 0.2s ease;
+        }
+        
+        .setting-info a:hover {
+            border-bottom-color: var(--accent-color);
+        }
+        
+        .setting-info small {
+            opacity: 0.8;
+            font-size: 13px;
+        }
+        
+        /* Dev null note styling */
+        .dev-null-note {
+            background: linear-gradient(135deg, #007aff10, #5ac8fa08);
+            border: 1px solid #007aff30;
+            border-radius: 12px;
+            margin: 0 -8px 16px -8px;
+            padding: 18px 20px !important;
+        }
+        
+        .dev-null-note .setting-info h3 {
+            color: #007aff;
+            font-weight: 700;
+        }
+        
+        .dev-null-note .setting-info p {
+            color: var(--text-color);
+            opacity: 0.9;
+            font-weight: 500;
+        }
+        
+        
+        /* Input group */
+        .input-group {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            min-width: 300px;
+        }
+        
+        .input-group input[type="url"] {
+            flex: 1;
+            padding: 10px 14px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--section-bg);
+            color: var(--text-color);
+            font-size: 14px;
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+            transition: all 0.2s ease;
+        }
+        
+        .input-group input[type="url"]:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px var(--accent-color)20;
+        }
+        
+        /* Search engine selector */
+        .search-engine-selector select {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 8px;
+            background: var(--button-bg);
+            color: var(--button-text);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            font-size: 15px;
+            min-width: 160px;
+            transition: all 0.3s ease;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 16px;
+            padding-right: 40px;
+            box-shadow: 0 2px 12px var(--shadow);
+            cursor: pointer;
+        }
+        
+        .search-engine-selector select:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px var(--accent-color)20;
+        }
+        
+        .search-engine-selector select:hover {
+            background: var(--button-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px var(--shadow);
+        }
+        
+        .search-engine-selector select option {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif !important;
+            font-weight: normal !important;
+            background: var(--bg-color);
+            color: var(--text-color);
+        }
+        
+        .search-engine-selector select, 
+        .search-engine-selector select * {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif !important;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-content">
+                <h1>Browser Settings</h1>
+            </div>
+        </div>
+        
+        <div class="privacy-section">
+            <div class="section">
+                <h2>Privacy & Data</h2>
+                <div class="setting-item dev-null-note" style="{{DEV_NULL_NOTE}}">
+                    <div class="setting-info">
+                        <h3>🔒 /dev/null Mode Active</h3>
+                        <p>This profile is in /dev/null mode. Cookies, history, and all other browser data are stored in RAM and will be lost when the tab is closed.</p>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <h3>Clear All Cookies</h3>
+                        <p>Remove all stored cookies from websites</p>
+                    </div>
+                    <button class="button small danger" onclick="clearCookies()">Clear Cookies</button>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <h3>Clear Website Data</h3>
+                        <p>Remove cookies, cache, and local storage</p>
+                    </div>
+                    <button class="button small danger" onclick="clearAllData()">Clear All Data</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="permissions-section">
+            <div class="section">
+                <h2>Site Permissions</h2>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <h3>Manage Site Permissions</h3>
+                        <p>View and revoke permissions granted to websites (camera, microphone, location, notifications)</p>
+                    </div>
+                    <button class="button small" onclick="openPermissions()">Manage Permissions</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="link-opening-section">
+            <div class="section">
+                <h2>Link Opening</h2>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <h3>Open Links From Terminal</h3>
+                        <p>Choose where links from the terminal should open</p>
+                    </div>
+                    <div class="search-engine-selector">
+                        <select id="linkOpeningSelect" onchange="updateLinkOpeningPreference()">
+                            <option value="ask">Always Ask</option>
+                            <option value="builtin">Built-in Browser</option>
+                            <option value="default">Default Browser</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="search-section">
+            <div class="section">
+                <h2>Search Engine</h2>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <h3>Default Search Engine</h3>
+                        <p>Choose your preferred search engine for web searches</p>
+                    </div>
+                    <div class="search-engine-selector">
+                        <select id="searchEngineSelect" onchange="updateSearchEngine()">
+                            <option value="google">Google</option>
+                            <option value="duckduckgo">DuckDuckGo</option>
+                            <option value="bing">Bing</option>
+                            <option value="kagi">Kagi</option>
+                            <option value="custom">Custom</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="setting-item" id="customSearchURLItem" style="display: none;">
+                    <div class="setting-info">
+                        <h3>Custom Search URL</h3>
+                        <p>Enter a custom search URL template. Use %@ where the search query should be inserted.</p>
+                    </div>
+                    <div class="input-group">
+                        <input type="url" id="customSearchURL" value="" placeholder="https://example.com/search?q=%@" onchange="updateCustomSearchURL(this.value)">
+                    </div>
+                </div>
+                <div class="setting-item" id="customSuggestURLItem" style="display: none;">
+                    <div class="setting-info">
+                        <h3>Custom Search Suggestions URL</h3>
+                        <p>Optional: Enter a URL template for search suggestions (OpenSearch format). Use %@ where the search query should be inserted.</p>
+                    </div>
+                    <div class="input-group">
+                        <input type="url" id="customSuggestURL" value="" placeholder="https://example.com/suggest?q=%@" onchange="updateCustomSuggestURL(this.value)">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="adblock-section">
+            <div class="section">
+                <h2>Ad Blocking</h2>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <h3>Enable WebKit Ad Blocking</h3>
+                        <p>Block ads using WebKit content rules (list-based blocking)</p>
+                    </div>
+                    <label class="toggle">
+                        <input type="checkbox" id="adblockEnabled" {{ADBLOCK_ENABLED}} onchange="toggleAdblock(this.checked)">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <h3>Filter List URL</h3>
+                        <p>URL for downloading WebKit ad blocking rules (updates daily)</p>
+                    </div>
+                    <div class="input-group">
+                        <input type="url" id="adblockURL" value="{{ADBLOCK_URL}}" placeholder="https://easylist-downloads.adblockplus.org/easylist_content_blocker.json" onchange="updateAdblockURL(this.value)">
+                        <button class="button small" onclick="forceAdblockUpdate()">Update Now</button>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <div class="status-message" id="adblockStatus" style="display: none;">
+                        <span class="status-text"></span>
+                    </div>
+                </div>
+                <div class="setting-item" id="adblockStats">
+                    <div class="setting-info">
+                        <h3>WebKit Filter Statistics</h3>
+                        <p id="adblockStatsText">Loading filter statistics…</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="proxy-section">
+            <div class="section">
+                <h2>Proxy Settings</h2>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <h3>Enable HTTP Proxy</h3>
+                        <p>Route browser traffic through a CONNECT proxy server.</p>
+                    </div>
+                    <label class="toggle">
+                        <input type="checkbox" id="proxyEnabled" onchange="toggleProxy(this.checked)">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <h3>Proxy Server</h3>
+                        <p>HTTP CONNECT proxy address and port</p>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" id="proxyHost" value="127.0.0.1" placeholder="127.0.0.1" onchange="updateProxyHost(this.value)" style="width: 150px;">
+                        <span>:</span>
+                        <input type="number" id="proxyPort" value="8118" placeholder="8118" min="1" max="65535" onchange="updateProxyPort(this.value)" style="width: 80px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="extensions-section" style="{{SHOW_EXTENSIONS}}">
+            <div class="section collapsible-section" id="extensionsSection">
+                <div class="collapsible-header" onclick="toggleExtensionsSection()">
+                    <div class="collapsible-title">
+                        <h2>Browser Extensions</h2>
+                        <p class="collapsible-subtitle">This feature is still in development. It is not intended for general use yet.</p>
+                    </div>
+                    <div class="collapse-indicator">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </div>
+                </div>
+                <div class="collapsible-content">
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <h3>Extensions Directory</h3>
+                            <p>Manage your browser extensions directory location and install new extensions</p>
+                        </div>
+                        <button class="button small" onclick="revealExtensionsDirectory()">Reveal in Finder</button>
+                    </div>
+                    <div id="extensionsContainer">
+                        <!-- Extensions will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+    <script>
+        function clearCookies() {
+            if (confirm('This will remove all cookies. Continue?')) {
+                window.webkit.messageHandlers['iterm2-about:settings'].postMessage({
+                    action: 'clearCookies',
+                    sessionSecret: sessionSecret
+                });
+            }
+        }
+        
+        function clearAllData() {
+            if (confirm('This will remove all browsing data including cookies, cache, and local storage. Continue?')) {
+                window.webkit.messageHandlers['iterm2-about:settings'].postMessage({
+                    action: 'clearAllData',
+                    sessionSecret: sessionSecret
+                });
+            }
+        }
+        
+        function toggleAdblock(enabled) {
+            window.webkit.messageHandlers['iterm2-about:settings'].postMessage({
+                action: 'setAdblockEnabled',
+                value: enabled,
+                sessionSecret: sessionSecret
+            });
+        }
+        
+        function updateAdblockURL(url) {
+            if (url && url.trim()) {
+                window.webkit.messageHandlers['iterm2-about:settings'].postMessage({
+                    action: 'setAdblockURL',
+                    value: url.trim(),
+                    sessionSecret: sessionSecret
+                });
+            }
+        }
+        
+        function forceAdblockUpdate() {
+            showStatus('Updating ad block rules…', 'info');
+            window.webkit.messageHandlers['iterm2-about:settings'].postMessage({
+                action: 'forceAdblockUpdate',
+                sessionSecret: sessionSecret
+            });
+            // Refresh stats after a brief delay to allow for update
+            setTimeout(() => {
+                window.webkit.messageHandlers['iterm2-about:settings'].postMessage({
+                    action: 'getAdblockStats',
+                    sessionSecret: sessionSecret
+                });
+            }, 2000);
+        }
+        
+        
+        
+        
+        
+        
+        function openPermissions() {
+            window.location.href = 'iterm2-about:permissions';
+        }
+        
+        // Status message functions
+        function showStatus(message, type = 'info', duration = 3000) {
+            const statusElement = document.getElementById('adblockStatus');
+            const textElement = statusElement.querySelector('.status-text');
+            
+            // Update content and show
+            textElement.textContent = message;
+            statusElement.className = `status-message ${type} show`;
+            statusElement.style.display = 'block';
+            
+            // Auto-hide after duration (unless it's an error)
+            if (type !== 'error' && duration > 0) {
+                setTimeout(() => {
+                    hideStatus();
+                }, duration);
+            }
+        }
+        
+        function hideStatus() {
+            const statusElement = document.getElementById('adblockStatus');
+            statusElement.classList.remove('show');
+            setTimeout(() => {
+                statusElement.style.display = 'none';
+            }, 300);
+        }
+        
+        // Search engine functionality
+        const sessionSecret = "{{SECRET}}";
+        const searchEngineConfigs = {
+            google: {
+                searchURL: 'https://google.com/search?q=%@',
+                suggestURL: 'https://suggestqueries.google.com/complete/search?client=firefox&q=%@'
+            },
+            duckduckgo: {
+                searchURL: 'https://duckduckgo.com/?q=%@',
+                suggestURL: 'https://duckduckgo.com/ac/?q=%@&type=list'
+            },
+            bing: {
+                searchURL: 'https://www.bing.com/search?q=%@',
+                suggestURL: 'https://www.bing.com/osjson.aspx?query=%@'
+            },
+            kagi: {
+                searchURL: 'https://kagi.com/search?q=%@',
+                suggestURL: 'https://kagi.com/api/autosuggest?q=%@'
+            }
+        };
+        
+        function updateSearchEngine() {
+            const select = document.getElementById('searchEngineSelect');
+            const customSearchItem = document.getElementById('customSearchURLItem');
+            const customSuggestItem = document.getElementById('customSuggestURLItem');
+            const selectedEngine = select.value;
+            
+            if (selectedEngine === 'custom') {
+                customSearchItem.style.display = 'flex';
+                customSuggestItem.style.display = 'flex';
+            } else {
+                customSearchItem.style.display = 'none';
+                customSuggestItem.style.display = 'none';
+                const config = searchEngineConfigs[selectedEngine];
+                if (config) {
+                    window.webkit.messageHandlers['iterm2-about:settings'].postMessage({
+                        action: 'setSearchCommand',
+                        value: config.searchURL,
+                        sessionSecret: sessionSecret
+                    });
+                    window.webkit.messageHandlers['iterm2-about:settings'].postMessage({
+                        action: 'setSearchSuggestURL',
+                        value: config.suggestURL,
+                        sessionSecret: sessionSecret
+                    });
+                }
+            }
+        }
+        
+        function updateCustomSearchURL(url) {
+            if (url && url.trim() && url.includes('%@')) {
+                window.webkit.messageHandlers['iterm2-about:settings'].postMessage({
+                    action: 'setSearchCommand',
+                    value: url.trim(),
+                    sessionSecret: sessionSecret
+                });
+            }
+        }
+        
+        function updateCustomSuggestURL(url) {
+            if (url && url.trim()) {
+                if (url.includes('%@')) {
+                    window.webkit.messageHandlers['iterm2-about:settings'].postMessage({
+                        action: 'setSearchSuggestURL',
+                        value: url.trim(),
+                        sessionSecret: sessionSecret
+                    });
+                }
+            } else {
+                // Empty URL - clear the suggestion URL
+                window.webkit.messageHandlers['iterm2-about:settings'].postMessage({
+                    action: 'setSearchSuggestURL',
+                    value: '',
+                    sessionSecret: sessionSecret
+                });
+            }
+        }
+        
+        function detectCurrentSearchEngine(currentURL) {
+            for (const [engine, config] of Object.entries(searchEngineConfigs)) {
+                if (config.searchURL === currentURL) {
+                    return engine;
+                }
+            }
+            return 'custom';
+        }
+        
+        // Link opening preference functions
+        function updateLinkOpeningPreference() {
+            const select = document.getElementById('linkOpeningSelect');
+            const selectedValue = select.value;
+
+            window.webkit.messageHandlers['iterm2-about:settings'].postMessage({
+                action: 'setLinkOpeningPreference',
+                value: selectedValue,
+                sessionSecret: sessionSecret
+            });
+        }
+
+        function updateLinkOpeningUI(settings) {
+            const select = document.getElementById('linkOpeningSelect');
+            select.value = settings.preference || 'ask';
+        }
+
+        // Initialize settings on page load
+        window.addEventListener('load', function() {
+            window.webkit.messageHandlers['iterm2-about:settings'].postMessage({
+                action: 'getAdblockSettings',
+                sessionSecret: sessionSecret
+            });
+            window.webkit.messageHandlers['iterm2-about:settings'].postMessage({
+                action: 'getSearchSettings',
+                sessionSecret: sessionSecret
+            });
+            window.webkit.messageHandlers['iterm2-about:settings'].postMessage({
+                action: 'getAdblockStats',
+                sessionSecret: sessionSecret
+            });
+            window.webkit.messageHandlers['iterm2-about:settings'].postMessage({
+                action: 'getProxySettings',
+                sessionSecret: sessionSecret
+            });
+            window.webkit.messageHandlers['iterm2-about:settings'].postMessage({
+                action: 'getExtensions',
+                sessionSecret: sessionSecret
+            });
+            window.webkit.messageHandlers['iterm2-about:settings'].postMessage({
+                action: 'getLinkOpeningPreference',
+                sessionSecret: sessionSecret
+            });
+
+            // Restore extensions section expanded state
+            const extensionsSectionExpanded = localStorage.getItem('extensionsSectionExpanded');
+            if (extensionsSectionExpanded === 'true') {
+                document.getElementById('extensionsSection').classList.add('expanded');
+            }
+        });
+
+        // Function to update UI with current settings (called from Swift)
+        function updateAdblockUI(settings) {
+            document.getElementById('adblockEnabled').checked = settings.enabled;
+            document.getElementById('adblockURL').value = settings.url;
+        }
+        
+        function updateSearchEngineUI(settings) {
+            const currentEngine = detectCurrentSearchEngine(settings.searchCommand);
+            const select = document.getElementById('searchEngineSelect');
+            const customSearchItem = document.getElementById('customSearchURLItem');
+            const customSuggestItem = document.getElementById('customSuggestURLItem');
+            const customSearchInput = document.getElementById('customSearchURL');
+            const customSuggestInput = document.getElementById('customSuggestURL');
+            
+            select.value = currentEngine;
+            
+            if (currentEngine === 'custom') {
+                customSearchItem.style.display = 'flex';
+                customSuggestItem.style.display = 'flex';
+                customSearchInput.value = settings.searchCommand;
+                customSuggestInput.value = settings.searchSuggestURL || '';
+            } else {
+                customSearchItem.style.display = 'none';
+                customSuggestItem.style.display = 'none';
+            }
+        }
+        
+        function updateAdblockStats(stats) {
+            const statsText = document.getElementById('adblockStatsText');
+            const ruleCount = stats.ruleCount;
+            const lastUpdate = stats.lastUpdate;
+            
+            if (ruleCount === 0) {
+                statsText.textContent = 'No filter rules loaded';
+                return;
+            }
+            
+            let text = `${ruleCount.toLocaleString()} filter rules loaded`;
+            
+            if (lastUpdate > 0) {
+                const lastUpdateDate = new Date(lastUpdate * 1000);
+                const now = new Date();
+                const diffHours = Math.floor((now - lastUpdateDate) / (1000 * 60 * 60));
+                
+                if (diffHours < 1) {
+                    text += ' (updated in the last hour)';
+                } else if (diffHours < 24) {
+                    text += ` (updated ${diffHours} hours ago)`;
+                } else {
+                    const diffDays = Math.floor(diffHours / 24);
+                    text += ` (updated ${diffDays} days ago)`;
+                }
+            }
+            
+            statsText.textContent = text;
+        }
+        
+        
+        
+        // Proxy settings functions
+        function toggleProxy(enabled) {
+            window.webkit.messageHandlers['iterm2-about:settings'].postMessage({
+                action: 'setProxyEnabled',
+                value: enabled,
+                sessionSecret: sessionSecret
+            });
+            updateProxyFieldsState(enabled);
+        }
+        
+        function updateProxyHost(host) {
+            if (host && host.trim()) {
+                window.webkit.messageHandlers['iterm2-about:settings'].postMessage({
+                    action: 'setProxyHost',
+                    value: host.trim(),
+                    sessionSecret: sessionSecret
+                });
+            }
+        }
+        
+        function updateProxyPort(port) {
+            const portNum = parseInt(port);
+            if (!isNaN(portNum) && portNum >= 1 && portNum <= 65535) {
+                window.webkit.messageHandlers['iterm2-about:settings'].postMessage({
+                    action: 'setProxyPort',
+                    value: portNum,
+                    sessionSecret: sessionSecret
+                });
+            }
+        }
+        
+        function updateProxyFieldsState(enabled) {
+            const hostField = document.getElementById('proxyHost');
+            const portField = document.getElementById('proxyPort');
+            hostField.disabled = !enabled;
+            portField.disabled = !enabled;
+            hostField.style.opacity = enabled ? '1' : '0.5';
+            portField.style.opacity = enabled ? '1' : '0.5';
+        }
+        
+        function updateProxyUI(settings) {
+            document.getElementById('proxyEnabled').checked = settings.enabled;
+            document.getElementById('proxyHost').value = settings.host;
+            document.getElementById('proxyPort').value = settings.port;
+            updateProxyFieldsState(settings.enabled);
+        }
+        
+        // Extension management functions
+        function toggleExtension(extensionId, enabled) {
+            window.webkit.messageHandlers['iterm2-about:settings'].postMessage({
+                action: 'setExtensionEnabled',
+                extensionId: extensionId,
+                enabled: enabled,
+                sessionSecret: sessionSecret
+            });
+        }
+        
+        function revealExtensionsDirectory() {
+            window.webkit.messageHandlers['iterm2-about:settings'].postMessage({
+                action: 'revealExtensionsDirectory',
+                sessionSecret: sessionSecret
+            });
+        }
+        
+        function toggleExtensionsSection() {
+            const section = document.getElementById('extensionsSection');
+            section.classList.toggle('expanded');
+            
+            // Save the expanded state to localStorage
+            const isExpanded = section.classList.contains('expanded');
+            localStorage.setItem('extensionsSectionExpanded', isExpanded);
+        }
+        
+        function updateExtensionsUI(extensions) {
+            const container = document.getElementById('extensionsContainer');
+            
+            if (!extensions || extensions.length === 0) {
+                container.innerHTML = `
+                    <div class="no-extensions">
+                        <h4>No Extensions Found</h4>
+                        <p>No browser extensions are currently installed. Extensions should be placed in your extensions directory as configured in your profile preferences.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = '';
+            
+            extensions.forEach(extension => {
+                const extensionBox = document.createElement('div');
+                extensionBox.className = 'extension-box';
+                
+                const description = extension.description || 'No description available';
+                const version = extension.version || 'Unknown version';
+                const permissions = extension.permissions || [];
+                const hostPermissions = extension.hostPermissions || [];
+                
+                extensionBox.innerHTML = `
+                    <div class="extension-header">
+                        <div class="extension-info">
+                            <h4>${extension.name}</h4>
+                            <p>${description}</p>
+                        </div>
+                        <label class="toggle">
+                            <input type="checkbox" ${extension.enabled ? 'checked' : ''} 
+                                   onchange="toggleExtension('${extension.id}', this.checked)">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="extension-details">
+                        <div class="extension-detail">
+                            <span>📦</span>
+                            <span>Version ${version}</span>
+                        </div>
+                        ${permissions.length > 0 ? `
+                        <div class="extension-detail">
+                            <span>🔑</span>
+                            <span>${permissions.length} permissions</span>
+                        </div>
+                        ` : ''}
+                        ${hostPermissions.length > 0 ? `
+                        <div class="extension-detail">
+                            <span>🌐</span>
+                            <span>${hostPermissions.length} host permissions</span>
+                        </div>
+                        ` : ''}
+                    </div>
+                `;
+                
+                container.appendChild(extensionBox);
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,194 @@
+{
+  "bullhorn": [
+    "ping"
+  ],
+  "compile": [
+    "cc",
+    "ccache",
+    "clang",
+    "gcc",
+    "gmake",
+    "make",
+    "xcodebuild"
+  ],
+  "clojure": [
+    "lein",
+    "planck",
+    "lumo"
+  ],
+  "database": [
+    "mongodb",
+    "mongod",
+    "mongo",
+    "mysql",
+    "pg_dump",
+    "pg_dumpall",
+    "pg_restore",
+    "pg_upgrade",
+    "pgbench",
+    "postmaster",
+    "redis-benchmark",
+    "redis-check-aof",
+    "redis-check-rdb",
+    "redis-cli",
+    "redis-sentinel",
+    "redis-server",
+    "sqlite3"
+  ],
+  "docker": [
+    "docker",
+    "docker-compose"
+  ],
+  "elixir": [
+    "elixir",
+    "elixirc",
+    "iex",
+    "mix"
+  ],
+  "erlang": [
+    "beam",
+    "beam.smp",
+    "dialyzer",
+    "epmd",
+    "erl",
+    "erlc",
+    "escript",
+    "run_erl",
+    "to_erl"
+  ],
+  "ethereum": [
+    "ethereum",
+    "geth",
+    "testrpc"
+  ],
+  "go": [
+    "go"
+  ],
+  "java": [
+    "java",
+    "javac"
+  ],
+  "git": [
+    "git",
+    "git-remote-ftp",
+    "git-remote-ftps",
+    "git-remote-http",
+    "git-remote-https"
+  ],
+  "heroku": [
+    "heroku"
+  ],
+  "http": [
+    "wget",
+    "http"
+  ],
+  "monitor": [
+    "htop",
+    "iftop",
+    "top"
+  ],
+  "nano": [
+    "nano"
+  ],
+  "neovim": [
+    "nvim"
+  ],
+  "nodejs": [
+    "node"
+  ],
+  "npm": [
+    "npm",
+    "npx"
+  ],
+  "perl": [
+    "perl"
+  ],
+  "php": [
+    "composer",
+    "composer.phar",
+    "php"
+  ],
+  "postgres": [
+    "postgres",
+    "psql"
+  ],
+  "ruby": [
+    "irb",
+    "sidekiq",
+    "rake",
+    "ruby"
+  ],
+  "search": [
+    "grep",
+    "egrep",
+    "fgrep",
+    "search",
+    "find",
+    "lookup"
+  ],
+  "shell": [
+    "bash",
+    "fish",
+    "zsh",
+    "tcsh"
+  ],
+  "code": [
+    "pico",
+  ],
+  "emacs": [
+    "emacs",
+    "Emacs"
+  ],
+  "read": [
+    "tail",
+    "less",
+    "more"
+  ],
+  "yarn": [
+    "yarn",
+    "yarnpkg"
+  ],
+  "zip": [
+    "bzip2",
+    "bunzip2",
+    "unzip",
+    "zip",
+    "gzip",
+    "gunzip",
+    "gzcat",
+    "tar",
+    "gz",
+    "winzip",
+    "zar"
+  ],
+  "curl": [
+    "curl"
+  ],
+  "python": [
+    "easy_install",
+    "IPython",
+    "ipython",
+    "pip",
+    "Python",
+    "python",
+    "python2",
+    "python2.7",
+    "python3",
+    "python3.1",
+    "python3.2",
+    "python3.3",
+    "python3.4",
+    "python3.5",
+    "python3.6",
+    "python3.7",
+    "python3.8",
+    "python3.9",
+    "python3.10",
+    "apython"
+  ],
+  "vim": [
+    "Vim",
+    "vi",
+    "vim",
+  ]
+}

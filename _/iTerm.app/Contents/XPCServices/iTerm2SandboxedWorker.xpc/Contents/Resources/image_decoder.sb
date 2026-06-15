@@ -1,0 +1,49 @@
+; This is a good place for inspiration:
+; https://searchfox.org/mozilla-central/source/security/sandbox/mac/SandboxPolicyContent.h
+(version 1)
+(deny default)
+
+(allow iokit-open
+  (iokit-user-client-class "IOSurfaceRootUserClient")
+)
+
+(allow file-read-data file-read-metadata
+  (regex "^/System/Library/Video/Plug-Ins")
+  (regex "^/System/Library/ColorSync/Profiles")
+  (regex "^/System/Library/Frameworks")
+  (regex "^/System/Library/PrivateFrameworks")
+  (regex "^/Library/Fonts$")
+  (regex "^/Library/Fonts/")
+  (regex "^/System/Library/Fonts$")
+  (regex "^/System/Library/Fonts/")
+  (regex "^/System/Library/Extensions/")
+  (regex "^/Library/GPUBundles")
+  (regex "^/System/Library/CoreServices")
+  (regex "^@HOME_DIRECTORY@/Library/Fonts$")
+  (regex "^@HOME_DIRECTORY@/Library/Fonts/")
+  (regex "^/usr/share/zoneinfo/")
+  (regex "^/usr/share/icu/")
+  (literal "/dev/null")
+  (literal "/dev/random")
+  (literal "@APP_ROOT@")
+  (literal "@PATH_TO_EXECUTABLE@/@EXECUTABLE@")
+  (regex "^/Library/Preferences/")
+  (regex "^/System/Library/CoreServices/SystemAppearance.bundle")
+  (regex "^/usr/lib")
+  (regex "^/etc"))
+  
+(allow ipc-posix-shm-read-data)
+
+(allow file-read-metadata
+  (regex "^/System$")
+  (regex "^/System/Library$")
+  (regex "^/System/Library/Fonts$")
+  (regex "^@HOME_DIRECTORY@/Library/Fonts$")
+  (regex "^/System/Library/Fonts/")
+  (regex "^/Library$")
+  (regex "^/Library/Fonts$")
+  (regex "^/Library/Fonts/")
+  (regex "^/var$"))
+
+(allow process-exec (literal "@PATH_TO_EXECUTABLE@/@EXECUTABLE@"))
+(allow mach* sysctl-read)
